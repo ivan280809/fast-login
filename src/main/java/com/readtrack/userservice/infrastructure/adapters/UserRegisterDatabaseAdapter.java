@@ -24,7 +24,6 @@ public class UserRegisterDatabaseAdapter implements UserRegisterDatabasePort {
 
     private User encodeUserPassword(User user) {
         String encodePassword = passwordEncoder.encode(user.getPassword());
-        User.of(user.getUsername(), user.getEmail(), encodePassword, user.getRole());
-        return user;
+        return User.of(user.getUsername(), user.getEmail(), encodePassword, user.getRole());
     }
 }
