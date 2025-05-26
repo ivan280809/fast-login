@@ -1,7 +1,7 @@
-package com.readtrack.userservice.domain.handlers;
+package com.readtrack.userservice.application.handlers;
 
 import com.readtrack.userservice.domain.exceptions.EmailAlreadyExistsException;
-import com.readtrack.userservice.domain.exceptions.InvalidPasswordException;
+import com.readtrack.userservice.application.exceptions.InvalidPasswordException;
 import com.readtrack.userservice.domain.exceptions.UsernameAlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

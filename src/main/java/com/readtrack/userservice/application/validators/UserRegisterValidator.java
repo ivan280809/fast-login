@@ -1,7 +1,7 @@
 package com.readtrack.userservice.application.validators;
 
 import com.readtrack.userservice.application.dtos.UserDTO;
-import com.readtrack.userservice.domain.exceptions.InvalidPasswordException;
+import com.readtrack.userservice.application.exceptions.InvalidPasswordException;
 import org.springframework.stereotype.Component;
 
 import java.util.regex.Pattern;

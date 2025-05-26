@@ -1,4 +1,4 @@
-package com.readtrack.userservice.domain.exceptions;
+package com.readtrack.userservice.application.exceptions;
 
 public class InvalidPasswordException extends RuntimeException {
 
