@@ -1,0 +1,30 @@
+package com.readtrack.userservice.infrastructure.adapters;
+
+import com.readtrack.userservice.domain.models.User;
+import com.readtrack.userservice.domain.ports.out.UserRegisterDatabasePort;
+import com.readtrack.userservice.infrastructure.mappers.UserMapper;
+import com.readtrack.userservice.infrastructure.repositories.UserRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+@Service
+@AllArgsConstructor
+public class UserRegisterDatabaseAdapter implements UserRegisterDatabasePort {
+
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final UserMapper userMapper;
+
+    @Override
+    public void saveUser(User user) {
+        User userWithEncodedPassWord = encodeUserPassword(user);
+        userRepository.save(userMapper.toUserMO(userWithEncodedPassWord));
+    }
+
+    private User encodeUserPassword(User user) {
+        String encodePassword = passwordEncoder.encode(user.getPassword());
+        User.of(user.getUsername(), user.getEmail(), encodePassword, user.getRole());
+        return user;
+    }
+}

@@ -11,12 +11,8 @@ public class UserRegisterUseCase {
     
     private final UserRegisterService userRegisterService;
 
-    public void registerUser(String username, String password, String email) {
-        User user = User.builder()
-                .username(username)
-                .password(password)
-                .email(email)
-                .role("USER")
-                .build();
+    public void registerUser(String email, String username, String password) {
+        User user = User.of(email, username, password, "USER");
+        userRegisterService.registerUser(user);
     }
 }
