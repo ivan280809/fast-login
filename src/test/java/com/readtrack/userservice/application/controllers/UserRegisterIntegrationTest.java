@@ -1,7 +1,7 @@
 package com.readtrack.userservice.application.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.readtrack.userservice.application.dtos.UserDTO;
+import com.readtrack.userservice.application.dtos.UserRegisterDTO;
 import com.readtrack.userservice.infrastructure.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,14 +30,14 @@ class UserRegisterIntegrationTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private UserDTO baseUser;
+    private UserRegisterDTO baseUser;
 
     @Autowired
     private UserRepository userRepository;
 
     @BeforeEach
     void setup() {
-        baseUser = new UserDTO("john_doe", "john@example.com", "Secure123!");
+        baseUser = new UserRegisterDTO("john_doe", "john@example.com", "Secure123!");
         userRepository.deleteAll();
     }
 
@@ -62,7 +62,7 @@ class UserRegisterIntegrationTest {
                         .content(objectMapper.writeValueAsString(baseUser)))
                 .andExpect(status().isCreated());
 
-        UserDTO duplicateUsername = new UserDTO("john_doe", "other@example.com", "Secure123!");
+        UserRegisterDTO duplicateUsername = new UserRegisterDTO("john_doe", "other@example.com", "Secure123!");
         mockMvc.perform(post("/users/register")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -79,7 +79,7 @@ class UserRegisterIntegrationTest {
                         .content(objectMapper.writeValueAsString(baseUser)))
                 .andExpect(status().isCreated());
 
-        UserDTO duplicateEmail = new UserDTO("another_user", "john@example.com", "Secure123!");
+        UserRegisterDTO duplicateEmail = new UserRegisterDTO("another_user", "john@example.com", "Secure123!");
         mockMvc.perform(post("/users/register")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -90,7 +90,7 @@ class UserRegisterIntegrationTest {
     @Test
     @WithMockUser
     void shouldNotRegisterUserWithInvalidPassword() throws Exception {
-        UserDTO invalidPasswordUser = new UserDTO("weak_user", "weak@example.com", "123");
+        UserRegisterDTO invalidPasswordUser = new UserRegisterDTO("weak_user", "weak@example.com", "123");
 
         mockMvc.perform(post("/users/register")
                         .with(csrf())

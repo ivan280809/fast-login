@@ -1,5 +1,6 @@
 package com.readtrack.userservice.application.handlers;
 
+import com.readtrack.userservice.application.exceptions.InvalidUsernameException;
 import com.readtrack.userservice.domain.exceptions.EmailAlreadyExistsException;
 import com.readtrack.userservice.application.exceptions.InvalidPasswordException;
 import com.readtrack.userservice.domain.exceptions.UsernameAlreadyExistsException;
@@ -16,6 +17,18 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(InvalidPasswordException.class)
     public ResponseEntity<?> handleInvalidPasswordException(InvalidPasswordException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(Map.of(
+                        "timestamp", LocalDateTime.now(),
+                        "status", 400,
+                        "error", "Bad Request",
+                        "message", ex.getMessage()
+                ));
+    }
+
+    @ExceptionHandler(InvalidUsernameException.class)
+    public ResponseEntity<?> handleInvalidUsernameException(InvalidPasswordException ex) {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(Map.of(

@@ -1,6 +1,6 @@
 package com.readtrack.userservice.application.controllers;
 
-import com.readtrack.userservice.application.dtos.UserDTO;
+import com.readtrack.userservice.application.dtos.UserRegisterDTO;
 import com.readtrack.userservice.application.mappers.UserControllerMapper;
 import com.readtrack.userservice.application.validators.UserRegisterValidator;
 import com.readtrack.userservice.domain.models.User;
@@ -31,12 +31,12 @@ class UserRegisterControllerTest {
     @InjectMocks
     private UserRegisterController userRegisterController;
 
-    private UserDTO userDTO;
+    private UserRegisterDTO userRegisterDTO;
     private User user;
 
     @BeforeEach
     void setUp() {
-        userDTO = UserDTO.
+        userRegisterDTO = UserRegisterDTO.
                     builder()
                 .username("testuser")
                 .email("test@example.com")
@@ -48,15 +48,15 @@ class UserRegisterControllerTest {
 
     @Test
     void registerUser_ShouldReturnCreatedStatus() {
-        doNothing().when(userRegisterValidator).validate(userDTO);
-        when(userControllerMapper.mapUserDTOToUser(userDTO)).thenReturn(user);
+        doNothing().when(userRegisterValidator).validate(userRegisterDTO);
+        when(userControllerMapper.mapUserDTOToUser(userRegisterDTO)).thenReturn(user);
         doNothing().when(userRegisterPort).registerUser(user);
 
-        ResponseEntity<Void> response = userRegisterController.registerUser(userDTO);
+        ResponseEntity<Void> response = userRegisterController.registerUser(userRegisterDTO);
 
         assertEquals(201, response.getStatusCodeValue());
-        verify(userRegisterValidator).validate(userDTO);
-        verify(userControllerMapper).mapUserDTOToUser(userDTO);
+        verify(userRegisterValidator).validate(userRegisterDTO);
+        verify(userControllerMapper).mapUserDTOToUser(userRegisterDTO);
         verify(userRegisterPort).registerUser(user);
     }
 }

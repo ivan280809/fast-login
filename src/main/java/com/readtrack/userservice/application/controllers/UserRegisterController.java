@@ -1,6 +1,6 @@
 package com.readtrack.userservice.application.controllers;
 
-import com.readtrack.userservice.application.dtos.UserDTO;
+import com.readtrack.userservice.application.dtos.UserRegisterDTO;
 import com.readtrack.userservice.application.mappers.UserControllerMapper;
 import com.readtrack.userservice.application.validators.UserRegisterValidator;
 import com.readtrack.userservice.domain.models.User;
@@ -24,9 +24,9 @@ public class UserRegisterController {
     private final UserControllerMapper userControllerMapper;
 
     @PostMapping
-    public ResponseEntity<Void> registerUser(@RequestBody @Valid UserDTO userDTO) {
-        userRegisterValidator.validate(userDTO);
-        User user = userControllerMapper.mapUserDTOToUser(userDTO);
+    public ResponseEntity<Void> registerUser(@RequestBody @Valid UserRegisterDTO userRegisterDTO) {
+        userRegisterValidator.validate(userRegisterDTO);
+        User user = userControllerMapper.mapUserDTOToUser(userRegisterDTO);
         userRegisterPort.registerUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
