@@ -1,5 +1,7 @@
 package com.readtrack.userservice.domain;
 
+import com.readtrack.userservice.domain.models.UserLogin;
+import com.readtrack.userservice.domain.models.UserTokenRole;
 import com.readtrack.userservice.domain.ports.in.UserLoginPort;
 import com.readtrack.userservice.domain.ports.out.UserLoginDatabasePort;
 import lombok.AllArgsConstructor;
@@ -11,6 +13,9 @@ public class UserLoginUseCase implements UserLoginPort {
 
     private final UserLoginDatabasePort userLoginDatabasePort;
 
-    
 
+    @Override
+    public UserTokenRole login(UserLogin userLogin) {
+        return null;
+    }
 }

@@ -49,14 +49,14 @@ class UserRegisterControllerTest {
     @Test
     void registerUser_ShouldReturnCreatedStatus() {
         doNothing().when(userRegisterValidator).validate(userRegisterDTO);
-        when(userControllerMapper.mapUserDTOToUser(userRegisterDTO)).thenReturn(user);
+        when(userControllerMapper.mapUserRegisterDTOToUser(userRegisterDTO)).thenReturn(user);
         doNothing().when(userRegisterPort).registerUser(user);
 
         ResponseEntity<Void> response = userRegisterController.registerUser(userRegisterDTO);
 
         assertEquals(201, response.getStatusCodeValue());
         verify(userRegisterValidator).validate(userRegisterDTO);
-        verify(userControllerMapper).mapUserDTOToUser(userRegisterDTO);
+        verify(userControllerMapper).mapUserRegisterDTOToUser(userRegisterDTO);
         verify(userRegisterPort).registerUser(user);
     }
 }

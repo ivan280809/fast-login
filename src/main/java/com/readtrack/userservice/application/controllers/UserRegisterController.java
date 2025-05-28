@@ -26,7 +26,7 @@ public class UserRegisterController {
     @PostMapping
     public ResponseEntity<Void> registerUser(@RequestBody @Valid UserRegisterDTO userRegisterDTO) {
         userRegisterValidator.validate(userRegisterDTO);
-        User user = userControllerMapper.mapUserDTOToUser(userRegisterDTO);
+        User user = userControllerMapper.mapUserRegisterDTOToUser(userRegisterDTO);
         userRegisterPort.registerUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
