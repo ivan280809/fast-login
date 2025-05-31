@@ -4,6 +4,8 @@ import com.readtrack.userservice.application.exceptions.InvalidUsernameException
 import com.readtrack.userservice.domain.exceptions.EmailAlreadyExistsException;
 import com.readtrack.userservice.application.exceptions.InvalidPasswordException;
 import com.readtrack.userservice.domain.exceptions.UsernameAlreadyExistsException;
+import com.readtrack.userservice.infrastructure.exceptions.LoginFindErrorException;
+import com.readtrack.userservice.infrastructure.exceptions.LoginValidationErrorException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -59,6 +61,30 @@ public class GlobalExceptionHandler {
                         "timestamp", LocalDateTime.now(),
                         "status", 409,
                         "error", "Conflict",
+                        "message", ex.getMessage()
+                ));
+    }
+
+    @ExceptionHandler(LoginFindErrorException.class)
+    public ResponseEntity<?> handleLoginFindException(LoginFindErrorException ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(Map.of(
+                        "timestamp", LocalDateTime.now(),
+                        "status", 404,
+                        "error", "Not Found",
+                        "message", ex.getMessage()
+                ));
+    }
+
+    @ExceptionHandler(LoginValidationErrorException.class)
+    public ResponseEntity<?> handleLoginValidationException(LoginValidationErrorException ex) {
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(Map.of(
+                        "timestamp", LocalDateTime.now(),
+                        "status", 401,
+                        "error", "Unauthorized",
                         "message", ex.getMessage()
                 ));
     }
