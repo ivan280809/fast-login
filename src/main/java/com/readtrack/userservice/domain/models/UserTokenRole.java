@@ -1,9 +1,9 @@
 package com.readtrack.userservice.domain.models;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Builder
+@AllArgsConstructor
 @Getter
 public class UserTokenRole {
     private String token;

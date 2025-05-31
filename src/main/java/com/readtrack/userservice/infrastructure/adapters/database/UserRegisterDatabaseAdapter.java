@@ -1,4 +1,4 @@
-package com.readtrack.userservice.infrastructure.adapters;
+package com.readtrack.userservice.infrastructure.adapters.database;
 
 import com.readtrack.userservice.domain.models.User;
 import com.readtrack.userservice.domain.ports.out.UserRegisterDatabasePort;
