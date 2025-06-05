@@ -16,7 +16,6 @@ public class UserLoginUseCase implements UserLoginPort {
     private final UserLoginDatabasePort userLoginDatabasePort;
     private final UserTokenPort userTokenPort;
 
-
     @Override
     public UserTokenRole login(UserLogin userLogin) {
         User user = userLoginDatabasePort.validateLogin(userLogin);

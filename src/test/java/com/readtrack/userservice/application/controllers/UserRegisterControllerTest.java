@@ -2,7 +2,7 @@ package com.readtrack.userservice.application.controllers;
 
 import com.readtrack.userservice.application.dtos.UserRegisterDTO;
 import com.readtrack.userservice.application.mappers.UserControllerMapper;
-import com.readtrack.userservice.application.validators.UserRegisterValidator;
+import com.readtrack.userservice.application.validators.UserControllerValidator;
 import com.readtrack.userservice.domain.models.User;
 import com.readtrack.userservice.domain.ports.in.UserRegisterPort;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 class UserRegisterControllerTest {
 
     @Mock
-    private UserRegisterValidator userRegisterValidator;
+    private UserControllerValidator userControllerValidator;
 
     @Mock
     private UserRegisterPort userRegisterPort;
@@ -48,14 +48,14 @@ class UserRegisterControllerTest {
 
     @Test
     void registerUser_ShouldReturnCreatedStatus() {
-        doNothing().when(userRegisterValidator).validate(userRegisterDTO);
+        doNothing().when(userControllerValidator).validateUserRegister(userRegisterDTO);
         when(userControllerMapper.mapUserRegisterDTOToUser(userRegisterDTO)).thenReturn(user);
         doNothing().when(userRegisterPort).registerUser(user);
 
         ResponseEntity<Void> response = userRegisterController.registerUser(userRegisterDTO);
 
         assertEquals(201, response.getStatusCodeValue());
-        verify(userRegisterValidator).validate(userRegisterDTO);
+        verify(userControllerValidator).validateUserRegister(userRegisterDTO);
         verify(userControllerMapper).mapUserRegisterDTOToUser(userRegisterDTO);
         verify(userRegisterPort).registerUser(user);
     }

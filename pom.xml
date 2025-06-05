@@ -8,11 +8,11 @@
 		<version>3.5.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.readtrack</groupId>
+	<groupId>com.utils.userservice</groupId>
 	<artifactId>user-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>user-service</name>
-	<description>ReadTrack app </description>
+	<description>User Auth Microservice</description>
 	<url/>
 	<licenses>
 		<license/>
