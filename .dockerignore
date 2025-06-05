@@ -1,0 +1,23 @@
+# Ignora todo lo relacionado con Git
+.git
+.gitignore
+
+# Ignora artefactos del IDE
+.idea
+*.iml
+*.classpath
+*.project
+*.settings
+
+# Ignora directorios de Maven
+target/
+
+# Ignora archivos temporales
+*.log
+*.tmp
+*.swp
+.env
+
+# Docker interno
+.dockerignore
+Dockerfile
