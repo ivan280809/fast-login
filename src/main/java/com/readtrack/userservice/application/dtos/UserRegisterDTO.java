@@ -14,15 +14,15 @@ import lombok.Setter;
 @Builder
 public class UserRegisterDTO {
 
-    @NotBlank(message = "Username must be provided")
-    @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters")
-    private String username;
+  @NotBlank(message = "Username must be provided")
+  @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters")
+  private String username;
 
-    @NotBlank(message = "Email is mandatory")
-    @Email(message = "Email should be valid")
-    private String email;
+  @NotBlank(message = "Email is mandatory")
+  @Email(message = "Email should be valid")
+  private String email;
 
-    @NotBlank(message = "Password is mandatory")
-    @Size(min = 8, message = "Password must be at least 8 characters long")
-    private String password;
+  @NotBlank(message = "Password is mandatory")
+  @Size(min = 8, message = "Password must be at least 8 characters long")
+  private String password;
 }

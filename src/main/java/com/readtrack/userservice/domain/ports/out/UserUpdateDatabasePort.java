@@ -1,7 +1,7 @@
-package com.readtrack.userservice.domain.ports.in;
+package com.readtrack.userservice.domain.ports.out;
 
 import com.readtrack.userservice.domain.models.UserUpdate;
 
-public interface UserUpdatePort {
+public interface UserUpdateDatabasePort {
   void updateUser(String username, UserUpdate userUpdate);
 }

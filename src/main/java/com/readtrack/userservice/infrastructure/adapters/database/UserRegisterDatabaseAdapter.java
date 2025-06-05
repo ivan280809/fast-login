@@ -14,21 +14,21 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class UserRegisterDatabaseAdapter implements UserRegisterDatabasePort {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final UserMapper userMapper;
-    private final UserDatabaseValidator userDatabaseValidator;
+  private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
+  private final UserMapper userMapper;
+  private final UserDatabaseValidator userDatabaseValidator;
 
-    @Override
-    @Transactional
-    public void saveUser(User user) {
-        userDatabaseValidator.validateNewUser(user);
-        User userWithEncodedPassWord = encodeUserPassword(user);
-        userRepository.save(userMapper.toUserMO(userWithEncodedPassWord));
-    }
+  @Override
+  @Transactional
+  public void saveUser(User user) {
+    userDatabaseValidator.validateNewUser(user);
+    User userWithEncodedPassWord = encodeUserPassword(user);
+    userRepository.save(userMapper.toUserMO(userWithEncodedPassWord));
+  }
 
-    private User encodeUserPassword(User user) {
-        String encodePassword = passwordEncoder.encode(user.getPassword());
-        return User.of(user.getEmail() ,user.getUsername(), encodePassword, user.getRole());
-    }
+  private User encodeUserPassword(User user) {
+    String encodePassword = passwordEncoder.encode(user.getPassword());
+    return User.of(user.getEmail(), user.getUsername(), encodePassword, user.getRole());
+  }
 }

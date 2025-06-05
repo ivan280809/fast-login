@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UserLoginUseCase implements UserLoginPort {
 
-    private final UserLoginDatabasePort userLoginDatabasePort;
-    private final UserTokenPort userTokenPort;
+  private final UserLoginDatabasePort userLoginDatabasePort;
+  private final UserTokenPort userTokenPort;
 
-    @Override
-    public UserTokenRole login(UserLogin userLogin) {
-        User user = userLoginDatabasePort.validateLogin(userLogin);
-        return userTokenPort.generateToken(user);
-    }
+  @Override
+  public UserTokenRole login(UserLogin userLogin) {
+    User user = userLoginDatabasePort.validateLogin(userLogin);
+    return userTokenPort.generateToken(user);
+  }
 }

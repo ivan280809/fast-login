@@ -6,6 +6,7 @@ import com.readtrack.userservice.application.validators.UserControllerValidator;
 import com.readtrack.userservice.domain.models.UserUpdate;
 import com.readtrack.userservice.domain.ports.in.UserUpdatePort;
 import jakarta.validation.Valid;
+import java.security.Principal;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -13,23 +14,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Principal;
-
 @RestController
-@RequestMapping("/users/update")
+@RequestMapping("/me")
 @AllArgsConstructor
 public class UserUpdateController {
 
-    private final UserUpdatePort userUpdatePort;
-    private final UserControllerMapper userControllerMapper;
-    private final UserControllerValidator userControllerValidator;
+  private final UserUpdatePort userUpdatePort;
+  private final UserControllerMapper userControllerMapper;
+  private final UserControllerValidator userControllerValidator;
 
-    @PutMapping("/me")
-    public ResponseEntity<Void> updateUser(@RequestBody @Valid UserUpdateDTO dto, Principal principal) {
-        userControllerValidator.validatePassword(dto.getNewPassword());
-        String username = principal.getName();
-        UserUpdate userUpdate = userControllerMapper.mapUserUpdateDTOToUserUpdate(dto);
-        userUpdatePort.updateUser(username, userUpdate);
-        return ResponseEntity.noContent().build();
-    }
+  @PutMapping
+  public ResponseEntity<Void> updateUser(
+      @RequestBody @Valid UserUpdateDTO dto, Principal principal) {
+    userControllerValidator.validatePassword(dto.getNewPassword());
+    String username = principal.getName();
+    UserUpdate userUpdate = userControllerMapper.mapUserUpdateDTOToUserUpdate(dto);
+    userUpdatePort.updateUser(username, userUpdate);
+    return ResponseEntity.noContent().build();
+  }
 }

@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class UserRegisterUseCase implements UserRegisterPort {
-    
-    private final UserRegisterService userRegisterService;
 
-    @Override
-    public void registerUser(User user) {
-        userRegisterService.registerUser(user);
-    }
+  private final UserRegisterService userRegisterService;
+
+  @Override
+  public void registerUser(User user) {
+    userRegisterService.registerUser(user);
+  }
 }

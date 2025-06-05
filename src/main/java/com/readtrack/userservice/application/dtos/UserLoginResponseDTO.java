@@ -6,7 +6,7 @@ import lombok.Getter;
 @Builder
 @Getter
 public class UserLoginResponseDTO {
-    private String token;
-    private String username;
-    private String role;
+  private String token;
+  private String username;
+  private String role;
 }

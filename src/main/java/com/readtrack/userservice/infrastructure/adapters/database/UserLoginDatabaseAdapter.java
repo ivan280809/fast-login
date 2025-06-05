@@ -16,32 +16,35 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UserLoginDatabaseAdapter implements UserLoginDatabasePort {
 
-    private final UserRepository userRepository;
-    private final UserMapper userMapper;
-    private final PasswordEncoder passwordEncoder;
+  private final UserRepository userRepository;
+  private final UserMapper userMapper;
+  private final PasswordEncoder passwordEncoder;
 
-    @Override
-    public User validateLogin(UserLogin userLogin) {
-        UserMO userMO = findUserMO(userLogin);
-        validatePassword(userLogin, userMO);
-        return userMapper.toUser(userMO);
-    }
+  @Override
+  public User validateLogin(UserLogin userLogin) {
+    UserMO userMO = findUserMO(userLogin);
+    validatePassword(userLogin, userMO);
+    return userMapper.toUser(userMO);
+  }
 
-    private UserMO findUserMO(UserLogin userLogin) {
-        return userLogin.isEmailLogin()
-                ? userRepository.findUserMOByEmail(userLogin.getUsernameOrEmail())
-                .orElseThrow(() -> getLoginValidationErrorException("Mail Not Found: ", userLogin))
-                : userRepository.findUserMOByUsername(userLogin.getUsernameOrEmail())
-                .orElseThrow(() -> getLoginValidationErrorException("User Not Found: ", userLogin));
-    }
+  private UserMO findUserMO(UserLogin userLogin) {
+    return userLogin.isEmailLogin()
+        ? userRepository
+            .findUserMOByEmail(userLogin.getUsernameOrEmail())
+            .orElseThrow(() -> getLoginValidationErrorException("Mail Not Found: ", userLogin))
+        : userRepository
+            .findUserMOByUsername(userLogin.getUsernameOrEmail())
+            .orElseThrow(() -> getLoginValidationErrorException("User Not Found: ", userLogin));
+  }
 
-    private LoginFindErrorException getLoginValidationErrorException(String x, UserLogin userLogin) {
-        return new LoginFindErrorException(x + userLogin.getUsernameOrEmail());
-    }
+  private LoginFindErrorException getLoginValidationErrorException(String x, UserLogin userLogin) {
+    return new LoginFindErrorException(x + userLogin.getUsernameOrEmail());
+  }
 
-    private void validatePassword(UserLogin userLogin, UserMO userMO) {
-        if (!passwordEncoder.matches(userLogin.getPassword(), userMO.getPassword())) {
-            throw new LoginValidationErrorException("Password not match: " + userLogin.getUsernameOrEmail());
-        }
+  private void validatePassword(UserLogin userLogin, UserMO userMO) {
+    if (!passwordEncoder.matches(userLogin.getPassword(), userMO.getPassword())) {
+      throw new LoginValidationErrorException(
+          "Password not match: " + userLogin.getUsernameOrEmail());
     }
+  }
 }

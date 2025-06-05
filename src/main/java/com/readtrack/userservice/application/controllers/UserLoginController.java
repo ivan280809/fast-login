@@ -15,18 +15,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/users/login")
+@RequestMapping("/login")
 @AllArgsConstructor
 public class UserLoginController {
 
-    private final UserLoginPort userLoginPort;
-    private final UserControllerMapper userControllerMapper;
+  private final UserLoginPort userLoginPort;
+  private final UserControllerMapper userControllerMapper;
 
-    @PostMapping
-    public ResponseEntity<UserLoginResponseDTO> loginUser(@RequestBody @Valid UserLoginDTO userLoginDTO) {
-        UserLogin userLogin = userControllerMapper.mapUserLoginDTOToUser(userLoginDTO);
-        UserTokenRole login = userLoginPort.login(userLogin);
-        UserLoginResponseDTO userLoginResponseDTO = userControllerMapper.mapUserTokenRoleToUserLoginResponseDTO(login);
-        return ResponseEntity.ok(userLoginResponseDTO);
-    }
+  @PostMapping
+  public ResponseEntity<UserLoginResponseDTO> loginUser(
+      @RequestBody @Valid UserLoginDTO userLoginDTO) {
+    UserLogin userLogin = userControllerMapper.mapUserLoginDTOToUser(userLoginDTO);
+    UserTokenRole login = userLoginPort.login(userLogin);
+    UserLoginResponseDTO userLoginResponseDTO =
+        userControllerMapper.mapUserTokenRoleToUserLoginResponseDTO(login);
+    return ResponseEntity.ok(userLoginResponseDTO);
+  }
 }

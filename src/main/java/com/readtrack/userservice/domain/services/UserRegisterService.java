@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UserRegisterService {
 
-    private final UserRegisterDatabasePort userRegisterDatabasePort;
+  private final UserRegisterDatabasePort userRegisterDatabasePort;
 
-    public void registerUser(User user) {
-        userRegisterDatabasePort.saveUser(user);
-    }
+  public void registerUser(User user) {
+    userRegisterDatabasePort.saveUser(user);
+  }
 }

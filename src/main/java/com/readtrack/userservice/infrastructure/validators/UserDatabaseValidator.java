@@ -11,14 +11,15 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class UserDatabaseValidator {
 
-    private final UserRepository userRepository;
+  private final UserRepository userRepository;
 
-    public void validateNewUser(User user) {
-        if (userRepository.existsByUsername(user.getUsername())) {
-            throw new UsernameAlreadyExistsException(user.getUsername());
-        }
-        if (userRepository.existsByEmail(user.getEmail())) {
-            throw new EmailAlreadyExistsException(user.getEmail());
-        }
+  public void validateNewUser(User user) {
+    if (userRepository.existsByUsername(user.getUsername())) {
+      throw new UsernameAlreadyExistsException("User " + user.getUsername() + " already exists.");
     }
+    if (userRepository.existsByEmail(user.getEmail())) {
+      throw new EmailAlreadyExistsException(
+          "Email " + user.getEmail() + " is already associated with another account.");
+    }
+  }
 }

@@ -11,11 +11,11 @@ import com.readtrack.userservice.domain.models.UserUpdate;
 
 public interface UserControllerMapper {
 
-    User mapUserRegisterDTOToUser(UserRegisterDTO userRegisterDTO) ;
+  User mapUserRegisterDTOToUser(UserRegisterDTO userRegisterDTO);
 
-    UserLogin mapUserLoginDTOToUser(UserLoginDTO userLoginDTO);
+  UserLogin mapUserLoginDTOToUser(UserLoginDTO userLoginDTO);
 
-    UserLoginResponseDTO mapUserTokenRoleToUserLoginResponseDTO(UserTokenRole userTokenRole);
+  UserLoginResponseDTO mapUserTokenRoleToUserLoginResponseDTO(UserTokenRole userTokenRole);
 
-    UserUpdate mapUserUpdateDTOToUserUpdate(UserUpdateDTO userUpdateDTO);
+  UserUpdate mapUserUpdateDTOToUserUpdate(UserUpdateDTO userUpdateDTO);
 }

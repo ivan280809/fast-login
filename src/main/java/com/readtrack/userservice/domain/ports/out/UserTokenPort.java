@@ -4,5 +4,5 @@ import com.readtrack.userservice.domain.models.User;
 import com.readtrack.userservice.domain.models.UserTokenRole;
 
 public interface UserTokenPort {
-    UserTokenRole generateToken(User user);
+  UserTokenRole generateToken(User user);
 }
