@@ -50,7 +50,7 @@ class UserRegisterControllerTest {
 
     ResponseEntity<Void> response = userRegisterController.registerUser(userRegisterDTO);
 
-    assertEquals(201, response.getStatusCodeValue());
+    assertEquals(201, response.getStatusCode().value());
     verify(userControllerValidator).validateUserRegister(userRegisterDTO);
     verify(userControllerMapper).mapUserRegisterDTOToUser(userRegisterDTO);
     verify(userRegisterPort).registerUser(user);

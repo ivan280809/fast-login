@@ -9,5 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 class UserServiceApplicationTests {
 
   @Test
-  void contextLoads() {}
+  void contextLoads() {
+    /* ContextLoads Test to Ensure all Beans work */
+  }
 }
