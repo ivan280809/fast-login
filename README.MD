@@ -40,7 +40,7 @@ Designed for fast setup, Docker-first deployment, and reuse in larger systems or
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/fast-login.git
+git clone https://github.com/ivan280809/fast-login.git
 cd fast-login
 ```
 
