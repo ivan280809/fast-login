@@ -5,9 +5,9 @@ services:
     image: postgres:15
     container_name: postgres-userservice
     environment:
-      POSTGRES_DB: user_service
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: user_service_dev_db
+      POSTGRES_USER: dev_user
+      POSTGRES_PASSWORD: dev_pass
     ports:
       - "5432:5432"
     volumes:
